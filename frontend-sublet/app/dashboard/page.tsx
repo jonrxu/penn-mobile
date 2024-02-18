@@ -103,7 +103,7 @@ const Dashboard = () => {
             <div className="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 space-x-2 space-y-2">
               <Card className="w-[380px]">
                 <CardHeader>
-                  <div className="flex items-center justify-between">
+                  <div className="my-[-8px] flex items-center justify-between">
                     <CardTitle>Property Title</CardTitle>
                     {/* <CardDescription>You have 3 unread messages.</CardDescription> */}
                     <Button variant="ghost" className="p-2">
@@ -160,7 +160,7 @@ const Dashboard = () => {
                       <CheckIcon className="ml-[-4px] mr-[-10px]" />
                       Mark as Claimed
                     </Button>
-                      <Button variant="secondary" className="w-full">
+                    <Button variant="secondary" className="w-full">
                       Edit
                     </Button>
                   </div>
