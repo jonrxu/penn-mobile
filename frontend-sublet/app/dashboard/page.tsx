@@ -1,15 +1,8 @@
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import {
-  Button
-} from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Sheet,
   SheetClose,
@@ -19,10 +12,50 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet"
+} from "@/components/ui/sheet";
 
-import { PlusIcon } from "@radix-ui/react-icons"
+import { PlusIcon, DotsHorizontalIcon as Dots } from "@radix-ui/react-icons";
 
+import { BellIcon, CheckIcon } from "@radix-ui/react-icons";
+
+import Image from "next/image";
+
+import { cn } from "@/lib/utils";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Switch } from "@/components/ui/switch";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+import SubletterListing from "@/components/custom/subletterlisting";
+
+const notifications = [
+  {
+    title: "Your call has been confirmed.",
+    description: "1 hour ago",
+  },
+  {
+    title: "You have a new message!",
+    description: "1 hour ago",
+  },
+  {
+    title: "Your subscription is expiring soon!",
+    description: "2 hours ago",
+  },
+];
 
 const Dashboard = () => {
   return (
@@ -43,7 +76,8 @@ const Dashboard = () => {
               <SheetHeader>
                 <SheetTitle>Edit profile</SheetTitle>
                 <SheetDescription>
-                  Make changes to your profile here. Click save when you're done.
+                  Make changes to your profile here. Click save when you're
+                  done.
                 </SheetDescription>
               </SheetHeader>
               <div className="grid gap-4 py-4">
@@ -51,13 +85,21 @@ const Dashboard = () => {
                   <Label htmlFor="name" className="text-right">
                     Name
                   </Label>
-                  <Input id="name" value="Pedro Duarte" className="col-span-3" />
+                  <Input
+                    id="name"
+                    value="Pedro Duarte"
+                    className="col-span-3"
+                  />
                 </div>
                 <div className="grid grid-cols-4 items-center gap-4">
                   <Label htmlFor="username" className="text-right">
                     Username
                   </Label>
-                  <Input id="username" value="@peduarte" className="col-span-3" />
+                  <Input
+                    id="username"
+                    value="@peduarte"
+                    className="col-span-3"
+                  />
                 </div>
               </div>
               <SheetFooter>
@@ -69,19 +111,107 @@ const Dashboard = () => {
           </Sheet>
         </div>
         <TabsContent value="posted" className="p-6">
-          <div className="pl-20">
-            <h1 className="text-4xl tracking-tighter font-semibold">Dashboard</h1>
-            <div>
-              
+          <div className="pl-20 space-y-10">
+            <h1 className="text-4xl tracking-tighter font-semibold">
+              Dashboard
+            </h1>
+            <div className="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 space-x-2 space-y-2">
+              <SubletterListing />
+
+              <Card className="w-[380px]">
+                <CardHeader>
+                  <CardTitle>Notifications</CardTitle>
+                  <CardDescription>You have 3 unread messages.</CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-4">
+                  <div className=" flex items-center space-x-4 rounded-md border p-4">
+                    <BellIcon />
+                    <div className="flex-1 space-y-1">
+                      <p className="text-sm font-medium leading-none">
+                        Push Notifications
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        Send notifications to device.
+                      </p>
+                    </div>
+                    <Switch />
+                  </div>
+                  <div>
+                    {notifications.map((notification, index) => (
+                      <div
+                        key={index}
+                        className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
+                      >
+                        <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
+                        <div className="space-y-1">
+                          <p className="text-sm font-medium leading-none">
+                            {notification.title}
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            {notification.description}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button className="w-full">
+                    <CheckIcon className="mr-2 h-4 w-4" /> Mark all as read
+                  </Button>
+                </CardFooter>
+              </Card>
+
+              <Card className="w-[380px]">
+                <CardHeader>
+                  <CardTitle>Notifications</CardTitle>
+                  <CardDescription>You have 3 unread messages.</CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-4">
+                  <div className=" flex items-center space-x-4 rounded-md border p-4">
+                    <BellIcon />
+                    <div className="flex-1 space-y-1">
+                      <p className="text-sm font-medium leading-none">
+                        Push Notifications
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        Send notifications to device.
+                      </p>
+                    </div>
+                    <Switch />
+                  </div>
+                  <div>
+                    {notifications.map((notification, index) => (
+                      <div
+                        key={index}
+                        className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
+                      >
+                        <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
+                        <div className="space-y-1">
+                          <p className="text-sm font-medium leading-none">
+                            {notification.title}
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            {notification.description}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button className="w-full">
+                    <CheckIcon className="mr-2 h-4 w-4" /> Mark all as read
+                  </Button>
+                </CardFooter>
+              </Card>
             </div>
           </div>
         </TabsContent>
-        <TabsContent value="drafts">
-          Change your password here.
-        </TabsContent>
+        <TabsContent value="drafts">Change your password here.</TabsContent>
       </Tabs>
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
